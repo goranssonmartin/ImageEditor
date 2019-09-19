@@ -11,10 +11,10 @@ namespace ImageEditorConsole
         static void Main(string[] args)
 
         {
-            string imagePath = args[0];
+            string imagePath = @"C:\Users\94margor\Desktop\123.jpg";//args[0];
 
             // try catch för args[0]!null och filepath = correct
-            if (!String.IsNullOrEmpty(args[0])) {
+            if (true) {
                 Bitmap originalImage = new Bitmap(imagePath);
                 Bitmap greyScale = ImageEditingProgram.MakeImageGreyScale(originalImage);
                 Bitmap negative = ImageEditingProgram.MakeImageNegative(originalImage);
@@ -26,6 +26,7 @@ namespace ImageEditorConsole
 
                 greyScale.Save(storageDirectory + "\\"+ fileName +  "_greyScale.jpg", ImageFormat.Jpeg);
                 negative.Save(storageDirectory + "\\" + fileName + "_negative.jpg", ImageFormat.Jpeg);
+                blurred.Save(storageDirectory + "\\" + fileName + "_blurred.jpg", ImageFormat.Jpeg);
             }
 
 
