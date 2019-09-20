@@ -8,9 +8,7 @@ namespace ImageEditor
     {
         public static Bitmap MakeImageGreyScale(Bitmap originalImage)
         {
-            //Bitmap originalImage = new Bitmap(imageFilePath);
             Bitmap greyScaleImage = new Bitmap(originalImage.Width, originalImage.Height);
-            //pixel value = medelvärde alla pixlar
 
             for (int x = 0; x < originalImage.Width; x++)
             {
@@ -22,15 +20,11 @@ namespace ImageEditor
                 }
 
             }
-
             return greyScaleImage;
         }
 
         public static Bitmap MakeImageNegative(Bitmap originalImage)
         {
-
-            //pixel value = 255-current pixelvalue
-            //Bitmap originalImage = new Bitmap(imageFilePath);
             Bitmap negativeImage = new Bitmap(originalImage.Width, originalImage.Height);
 
             for (int x = 0; x < originalImage.Width; x++)
@@ -44,9 +38,7 @@ namespace ImageEditor
                     negativeImage.SetPixel(x, y, Color.FromArgb(255, newRValue, newGValue, newBValue));
 
                 }
-
             }
-
             return negativeImage;
         }
 
@@ -62,7 +54,6 @@ namespace ImageEditor
                     int averageR = 0;
                     int averageG = 0;
                     int averageB = 0;
-
 
                     if (x == 0 && y == 0)
                     {
@@ -162,11 +153,9 @@ namespace ImageEditor
                         averageB = averageB / 9;
                         blurred.SetPixel(x, y, Color.FromArgb(255, averageR, averageG, averageB));
                     }
-                    //blurred.SetPixel(x, y, Color.FromArgb(255, averageR, averageG, averageB));
                 }
 
             }
-
             return blurred;
         }
     }

@@ -31,10 +31,10 @@ namespace ImageEditorWinForms
             button4.Enabled = false;
             button5.Enabled = false;
         }
-        string imagePath="";
+        string imagePath = "";
         string currentImage = "";
-        
-        
+
+
         private void Button1_Click(object sender, EventArgs e)
         {
             openFileDialog1.InitialDirectory = "C:\\";
@@ -50,7 +50,7 @@ namespace ImageEditorWinForms
                 button5.Enabled = true;
             }
         }
-        
+
         private void Button2_Click(object sender, EventArgs e)
         {
             Bitmap originalImage = new Bitmap(imagePath);
@@ -87,11 +87,9 @@ namespace ImageEditorWinForms
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                
-                
                 pictureBox2.Image.Save(saveFileDialog1.FileName);
             }
-            
+
         }
     }
 }
