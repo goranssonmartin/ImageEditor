@@ -11,7 +11,7 @@ namespace ImageEditorConsole
         static void Main(string[] args)
 
         {
-            string imagePath; // = @"C:\Users\94margor\Desktop\123.jpg";//args[0];
+            string imagePath;
             Bitmap originalImage;
             try
             {

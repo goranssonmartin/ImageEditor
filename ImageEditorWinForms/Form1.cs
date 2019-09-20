@@ -32,12 +32,14 @@ namespace ImageEditorWinForms
             button5.Enabled = false;
         }
         string imagePath="";
+        string currentImage = "";
         
         
         private void Button1_Click(object sender, EventArgs e)
         {
             openFileDialog1.InitialDirectory = "C:\\";
             openFileDialog1.Filter = "Image Files (*.PNG; *.JPG)| *.PNG; *.JPG";
+            openFileDialog1.FileName = "";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 imagePath = openFileDialog1.FileName;
@@ -55,6 +57,7 @@ namespace ImageEditorWinForms
             Bitmap greyScale = ImageEditingProgram.MakeImageGreyScale(originalImage);
 
             pictureBox2.Image = greyScale;
+            currentImage = "_greyScale";
         }
 
         private void Button3_Click(object sender, EventArgs e)
@@ -63,6 +66,7 @@ namespace ImageEditorWinForms
             Bitmap negative = ImageEditingProgram.MakeImageNegative(originalImage);
 
             pictureBox2.Image = negative;
+            currentImage = "_negative";
         }
 
         private void Button4_Click(object sender, EventArgs e)
@@ -71,16 +75,20 @@ namespace ImageEditorWinForms
             Bitmap blurred = ImageEditingProgram.MakeImageBlurred(originalImage);
 
             pictureBox2.Image = blurred;
+            currentImage = "_blurred";
         }
 
         private void Button5_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.InitialDirectory = "C:\\";
+            string fileName = Path.GetFileNameWithoutExtension(imagePath);
+            saveFileDialog1.InitialDirectory = Path.GetDirectoryName(imagePath);
             saveFileDialog1.Filter = "Image Files (*.JPG)| *.JPG";
+            saveFileDialog1.FileName = fileName + currentImage;
 
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                string fileName = Path.GetFileNameWithoutExtension(imagePath);
+                
+                
                 pictureBox2.Image.Save(saveFileDialog1.FileName);
             }
             
