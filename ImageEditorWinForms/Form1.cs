@@ -19,75 +19,75 @@ namespace ImageEditorWinForms
         {
             InitializeComponent();
 
-            pictureBox1.Height = 250;
-            pictureBox1.Width = 150;
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            originalImage.Height = 250;
+            originalImage.Width = 150;
+            originalImage.SizeMode = PictureBoxSizeMode.Zoom;
 
-            pictureBox2.Height = 250;
-            pictureBox2.Width = 150;
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            button2.Enabled = false;
-            button3.Enabled = false;
-            button4.Enabled = false;
-            button5.Enabled = false;
+            editedImage.Height = 250;
+            editedImage.Width = 150;
+            editedImage.SizeMode = PictureBoxSizeMode.Zoom;
+            greyScaleButton.Enabled = false;
+            negativeButton.Enabled = false;
+            blurredButton.Enabled = false;
+            saveFileButton.Enabled = false;
         }
         string imagePath = "";
         string currentImage = "";
 
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void OpenFileButton_Click(object sender, EventArgs e)
         {
-            openFileDialog1.InitialDirectory = "C:\\";
-            openFileDialog1.Filter = "Image Files (*.PNG; *.JPG)| *.PNG; *.JPG";
-            openFileDialog1.FileName = "";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            openFileDialog.InitialDirectory = "C:\\";
+            openFileDialog.Filter = "Image Files (*.PNG; *.JPG)| *.PNG; *.JPG";
+            openFileDialog.FileName = "";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                imagePath = openFileDialog1.FileName;
-                pictureBox1.Image = Image.FromFile(imagePath);
-                button2.Enabled = true;
-                button3.Enabled = true;
-                button4.Enabled = true;
-                button5.Enabled = true;
+                imagePath = openFileDialog.FileName;
+                originalImage.Image = Image.FromFile(imagePath);
+                greyScaleButton.Enabled = true;
+                negativeButton.Enabled = true;
+                blurredButton.Enabled = true;
+                saveFileButton.Enabled = true;
             }
         }
 
-        private void Button2_Click(object sender, EventArgs e)
+        private void GreyScaleButton_Click(object sender, EventArgs e)
         {
             Bitmap originalImage = new Bitmap(imagePath);
             Bitmap greyScale = ImageEditingProgram.MakeImageGreyScale(originalImage);
 
-            pictureBox2.Image = greyScale;
+            editedImage.Image = greyScale;
             currentImage = "_greyScale";
         }
 
-        private void Button3_Click(object sender, EventArgs e)
+        private void NegativeButton_Click(object sender, EventArgs e)
         {
             Bitmap originalImage = new Bitmap(imagePath);
             Bitmap negative = ImageEditingProgram.MakeImageNegative(originalImage);
 
-            pictureBox2.Image = negative;
+            editedImage.Image = negative;
             currentImage = "_negative";
         }
 
-        private void Button4_Click(object sender, EventArgs e)
+        private void BlurredButton_Click(object sender, EventArgs e)
         {
             Bitmap originalImage = new Bitmap(imagePath);
             Bitmap blurred = ImageEditingProgram.MakeImageBlurred(originalImage);
 
-            pictureBox2.Image = blurred;
+            editedImage.Image = blurred;
             currentImage = "_blurred";
         }
 
-        private void Button5_Click(object sender, EventArgs e)
+        private void SaveFileButton_Click(object sender, EventArgs e)
         {
             string fileName = Path.GetFileNameWithoutExtension(imagePath);
-            saveFileDialog1.InitialDirectory = Path.GetDirectoryName(imagePath);
-            saveFileDialog1.Filter = "Image Files (*.JPG)| *.JPG";
-            saveFileDialog1.FileName = fileName + currentImage;
+            saveFileDialog.InitialDirectory = Path.GetDirectoryName(imagePath);
+            saveFileDialog.Filter = "Image Files (*.JPG)| *.JPG";
+            saveFileDialog.FileName = fileName + currentImage;
 
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                pictureBox2.Image.Save(saveFileDialog1.FileName);
+                editedImage.Image.Save(saveFileDialog.FileName);
             }
 
         }
