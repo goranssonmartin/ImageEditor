@@ -12,23 +12,25 @@ namespace ImageEditorConsole
 
         {
             string imagePath; // = @"C:\Users\94margor\Desktop\123.jpg";//args[0];
+            Bitmap originalImage;
             try
             {
                 imagePath = args[0];
             }
 
-            catch (IndexOutOfRangeException e)
+            catch (IndexOutOfRangeException)
             {
-                Console.WriteLine("Type correct filepath for the image");
+                Console.WriteLine("File path not entered, please enter a path to an image file");
                 imagePath = Console.ReadLine();
+                imagePath = CheckIfGivenFileExists(imagePath);
             }
-            // try catch för args[0]!null och filepath = correct
 
-            Bitmap originalImage = new Bitmap(imagePath);
+
+            originalImage = TryToCreateNewBitmap(imagePath);
+
             Bitmap greyScale = ImageEditingProgram.MakeImageGreyScale(originalImage);
             Bitmap negative = ImageEditingProgram.MakeImageNegative(originalImage);
             Bitmap blurred = ImageEditingProgram.MakeImageBlurred(originalImage);
-            //new file = old.replace @. with _greyscale.jpg
 
             string storageDirectory = Path.GetDirectoryName(imagePath);
             string fileName = Path.GetFileNameWithoutExtension(imagePath);
@@ -36,6 +38,40 @@ namespace ImageEditorConsole
             greyScale.Save(storageDirectory + "\\" + fileName + "_greyScale.jpg", ImageFormat.Jpeg);
             negative.Save(storageDirectory + "\\" + fileName + "_negative.jpg", ImageFormat.Jpeg);
             blurred.Save(storageDirectory + "\\" + fileName + "_blurred.jpg", ImageFormat.Jpeg);
+
+        }
+        public static Bitmap TryToCreateNewBitmap(string imagePath)
+        {
+            Bitmap originalImage;
+            try
+            {
+                originalImage = new Bitmap(imagePath);
+            }
+
+            catch (ArgumentException)
+            {
+                Console.WriteLine("Something went wrong, enter new image path");
+                imagePath = Console.ReadLine();
+                originalImage = TryToCreateNewBitmap(imagePath);
+            }
+
+            return originalImage;
+        }
+
+        public static string CheckIfGivenFileExists(string imagePath)
+        {
+            if (File.Exists(imagePath))
+            {
+                return imagePath;
+            }
+
+            else
+            {
+                Console.WriteLine("Enter a valid filepath");
+                imagePath = Console.ReadLine();
+                return CheckIfGivenFileExists(imagePath);
+            }
+
 
         }
     }
