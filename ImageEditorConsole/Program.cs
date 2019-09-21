@@ -46,16 +46,16 @@ namespace ImageEditorConsole
             try
             {
                 originalImage = new Bitmap(imagePath);
+                return originalImage;
             }
 
             catch (ArgumentException)
             {
                 Console.WriteLine("Something went wrong, enter new image path");
                 imagePath = Console.ReadLine();
-                originalImage = TryToCreateNewBitmap(imagePath);
+                return TryToCreateNewBitmap(imagePath);
             }
 
-            return originalImage;
         }
 
         public static string CheckIfGivenFileExists(string imagePath)
