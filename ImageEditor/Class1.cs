@@ -55,6 +55,7 @@ namespace ImageEditor
                     int averageG = 0;
                     int averageB = 0;
 
+                    //Top Left Corner
                     if (x == 0 && y == 0)
                     {
                         averageR = originalImage.GetPixel(x, y).R + originalImage.GetPixel(x + 1, y).R + originalImage.GetPixel(x, y + 1).R + originalImage.GetPixel(x + 1, y + 1).R;
@@ -66,16 +67,19 @@ namespace ImageEditor
                         blurred.SetPixel(x, y, Color.FromArgb(255, averageR, averageG, averageB));
                     }
 
+                    //Bottom Left Corner
                     else if (x == 0 && y == originalImage.Height - 1)
                     {
-                        averageR = originalImage.GetPixel(x + 1, y - 1).R + originalImage.GetPixel(x, y - 1).R + originalImage.GetPixel(x, y).R + originalImage.GetPixel(x + 1, y).R;
-                        averageG = originalImage.GetPixel(x + 1, y - 1).G + originalImage.GetPixel(x, y - 1).G + originalImage.GetPixel(x, y).G + originalImage.GetPixel(x + 1, y).G;
-                        averageB = originalImage.GetPixel(x + 1, y - 1).B + originalImage.GetPixel(x, y - 1).B + originalImage.GetPixel(x, y).B + originalImage.GetPixel(x + 1, y).B;
+                        averageR = originalImage.GetPixel(x, y).R + originalImage.GetPixel(x, y - 1).R + originalImage.GetPixel(x + 1, y - 1).R + originalImage.GetPixel(x + 1, y).R;
+                        averageG = originalImage.GetPixel(x, y).G + originalImage.GetPixel(x, y - 1).G + originalImage.GetPixel(x + 1, y - 1).G + originalImage.GetPixel(x + 1, y).G;
+                        averageB = originalImage.GetPixel(x, y).B + originalImage.GetPixel(x, y - 1).B + originalImage.GetPixel(x + 1, y - 1).B + originalImage.GetPixel(x + 1, y).B;
                         averageR = averageR / 4;
                         averageG = averageG / 4;
                         averageB = averageB / 4;
                         blurred.SetPixel(x, y, Color.FromArgb(255, averageR, averageG, averageB));
                     }
+
+                    //Top Right Corner
                     else if (x == originalImage.Width - 1 && y == 0)
                     {
                         averageR = originalImage.GetPixel(x, y).R + originalImage.GetPixel(x - 1, y).R + originalImage.GetPixel(x - 1, y + 1).R + originalImage.GetPixel(x, y + 1).R;
@@ -87,6 +91,7 @@ namespace ImageEditor
                         blurred.SetPixel(x, y, Color.FromArgb(255, averageR, averageG, averageB));
                     }
 
+                    //Bottom Right Corner
                     else if (x == originalImage.Width - 1 && y == originalImage.Height - 1)
                     {
                         averageR = originalImage.GetPixel(x, y).R + originalImage.GetPixel(x - 1, y).R + originalImage.GetPixel(x - 1, y - 1).R + originalImage.GetPixel(x, y - 1).R;
@@ -97,6 +102,8 @@ namespace ImageEditor
                         averageB = averageB / 4;
                         blurred.SetPixel(x, y, Color.FromArgb(255, averageR, averageG, averageB));
                     }
+
+                    //Left Side
                     else if (x == 0 && y > 0 && y < originalImage.Height - 1)
                     {
                         averageR = originalImage.GetPixel(x, y - 1).R + originalImage.GetPixel(x + 1, y - 1).R + originalImage.GetPixel(x, y).R + originalImage.GetPixel(x + 1, y).R + originalImage.GetPixel(x, y + 1).R + originalImage.GetPixel(x + 1, y + 1).R;
@@ -107,7 +114,7 @@ namespace ImageEditor
                         averageB = averageB / 6;
                         blurred.SetPixel(x, y, Color.FromArgb(255, averageR, averageG, averageB));
                     }
-
+                    //Top Side
                     else if (y == 0 && x > 0 && x < originalImage.Width - 1)
                     {
                         averageR = originalImage.GetPixel(x - 1, y).R + originalImage.GetPixel(x, y).R + originalImage.GetPixel(x + 1, y).R + originalImage.GetPixel(x - 1, y + 1).R + originalImage.GetPixel(x, y + 1).R + originalImage.GetPixel(x + 1, y + 1).R;
@@ -118,7 +125,7 @@ namespace ImageEditor
                         averageB = averageB / 6;
                         blurred.SetPixel(x, y, Color.FromArgb(255, averageR, averageG, averageB));
                     }
-
+                    //Right Side
                     else if (x == originalImage.Width - 1 && y > 0 && y < originalImage.Height - 1)
                     {
                         averageR = originalImage.GetPixel(x - 1, y - 1).R + originalImage.GetPixel(x, y - 1).R + originalImage.GetPixel(x - 1, y).R + originalImage.GetPixel(x, y).R + originalImage.GetPixel(x - 1, y + 1).R + originalImage.GetPixel(x, y + 1).R;
@@ -130,7 +137,7 @@ namespace ImageEditor
                         blurred.SetPixel(x, y, Color.FromArgb(255, averageR, averageG, averageB));
 
                     }
-
+                    //Bottom Side
                     else if (y == originalImage.Height - 1 && x > 0 && x < originalImage.Width - 1)
                     {
                         averageR = originalImage.GetPixel(x - 1, y - 1).R + originalImage.GetPixel(x, y - 1).R + originalImage.GetPixel(x + 1, y - 1).R + originalImage.GetPixel(x - 1, y).R + originalImage.GetPixel(x, y).R + originalImage.GetPixel(x + 1, y).R;
@@ -142,7 +149,7 @@ namespace ImageEditor
                         blurred.SetPixel(x, y, Color.FromArgb(255, averageR, averageG, averageB));
 
                     }
-
+                    //Middle
                     else if (x >= 1 && y >= 1 && x < originalImage.Width - 1 && y < originalImage.Height - 1)
                     {
                         averageR = originalImage.GetPixel(x - 1, y - 1).R + originalImage.GetPixel(x, y - 1).R + originalImage.GetPixel(x + 1, y - 1).R + originalImage.GetPixel(x - 1, y).R + originalImage.GetPixel(x, y).R + originalImage.GetPixel(x + 1, y).R + originalImage.GetPixel(x - 1, y + 1).R + originalImage.GetPixel(x, y + 1).R + originalImage.GetPixel(x + 1, y + 1).R;
