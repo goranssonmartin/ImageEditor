@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using ImageEditor;
 using System.Drawing;
+
 namespace Tests
 {
     public class Tests
@@ -63,7 +64,7 @@ namespace Tests
 
 
         [Test]
-        public void Test_CheckIfMiddlePixelReturnsExpectedBlur()
+        public void Test_CheckIfMiddlePixelsGetsExpectedBlur()
         {
             Bitmap blurredTest = new Bitmap(3, 3);
             Color black = Color.FromArgb(255, 0, 0, 0);
@@ -84,7 +85,7 @@ namespace Tests
         }
 
         [Test]
-        public void Test_CheckIfCornerPixelsReturnsExpectedBlur()
+        public void Test_CheckIfCornerPixelsGetsExpectedBlur()
         {
             Bitmap blurredTest = new Bitmap(3, 3);
             Color black = Color.FromArgb(255, 0, 0, 0);
@@ -109,7 +110,7 @@ namespace Tests
 
         
         [Test]
-        public void Test_CheckIfSidePixelsReturnsExpectedBlur()
+        public void Test_CheckIfSidePixelsGetsExpectedBlur()
         {
             Bitmap blurredTest = new Bitmap(3, 3);
             Color black = Color.FromArgb(255, 0, 0, 0);
@@ -139,6 +140,25 @@ namespace Tests
             Assert.AreEqual(testBlurImageSize.Size, ImageEditingProgram.MakeImageBlurred(testBlurImageSize).Size);
         }
 
-        
+        [Test]
+        public void Test_CheckIfSmallImageGetsCorrectBlur()
+        {
+            Bitmap blurredTest = new Bitmap(2, 2);
+            Color black = Color.FromArgb(255, 0, 0, 0);
+            Color white = Color.FromArgb(255, 255, 255, 255);
+            Color expectedBlurredPixel = Color.FromArgb(255, 127, 127, 127);
+
+            //2x2 with middle pixel white surrounded by black pixels
+            blurredTest.SetPixel(0, 0, white);
+            blurredTest.SetPixel(0, 1, black);
+            blurredTest.SetPixel(1, 0, black);
+            blurredTest.SetPixel(1, 1, white);
+            Assert.AreEqual(expectedBlurredPixel, ImageEditingProgram.MakeImageBlurred(blurredTest).GetPixel(0, 0));
+            Assert.AreEqual(expectedBlurredPixel, ImageEditingProgram.MakeImageBlurred(blurredTest).GetPixel(0, 1));
+            Assert.AreEqual(expectedBlurredPixel, ImageEditingProgram.MakeImageBlurred(blurredTest).GetPixel(1, 0));
+            Assert.AreEqual(expectedBlurredPixel, ImageEditingProgram.MakeImageBlurred(blurredTest).GetPixel(1, 1));
+        }
+
+
     }
 }

@@ -13,9 +13,9 @@ using System.Windows.Forms;
 
 namespace ImageEditorWinForms
 {
-    public partial class Form1 : Form
+    public partial class ImageEditorForm : Form
     {
-        public Form1()
+        public ImageEditorForm()
         {
             InitializeComponent();
 
@@ -26,13 +26,14 @@ namespace ImageEditorWinForms
             editedImage.Height = 250;
             editedImage.Width = 150;
             editedImage.SizeMode = PictureBoxSizeMode.Zoom;
+
             greyScaleButton.Enabled = false;
             negativeButton.Enabled = false;
             blurredButton.Enabled = false;
             saveFileButton.Enabled = false;
         }
         string imagePath = "";
-        string currentImage = "";
+        string currentImageSuffix = "";
 
 
         private void OpenFileButton_Click(object sender, EventArgs e)
@@ -54,28 +55,28 @@ namespace ImageEditorWinForms
         private void GreyScaleButton_Click(object sender, EventArgs e)
         {
             Bitmap originalImage = new Bitmap(imagePath);
-            Bitmap greyScale = ImageEditingProgram.MakeImageGreyScale(originalImage);
+            Bitmap greyScaleImage = ImageEditingProgram.MakeImageGreyScale(originalImage);
 
-            editedImage.Image = greyScale;
-            currentImage = "_greyScale";
+            editedImage.Image = greyScaleImage;
+            currentImageSuffix = "_greyScale";
         }
 
         private void NegativeButton_Click(object sender, EventArgs e)
         {
             Bitmap originalImage = new Bitmap(imagePath);
-            Bitmap negative = ImageEditingProgram.MakeImageNegative(originalImage);
+            Bitmap negativeImage = ImageEditingProgram.MakeImageNegative(originalImage);
 
-            editedImage.Image = negative;
-            currentImage = "_negative";
+            editedImage.Image = negativeImage;
+            currentImageSuffix = "_negative";
         }
 
         private void BlurredButton_Click(object sender, EventArgs e)
         {
             Bitmap originalImage = new Bitmap(imagePath);
-            Bitmap blurred = ImageEditingProgram.MakeImageBlurred(originalImage);
+            Bitmap blurredImage = ImageEditingProgram.MakeImageBlurred(originalImage);
 
-            editedImage.Image = blurred;
-            currentImage = "_blurred";
+            editedImage.Image = blurredImage;
+            currentImageSuffix = "_blurred";
         }
 
         private void SaveFileButton_Click(object sender, EventArgs e)
@@ -83,7 +84,7 @@ namespace ImageEditorWinForms
             string fileName = Path.GetFileNameWithoutExtension(imagePath);
             saveFileDialog.InitialDirectory = Path.GetDirectoryName(imagePath);
             saveFileDialog.Filter = "Image Files (*.JPG)| *.JPG";
-            saveFileDialog.FileName = fileName + currentImage;
+            saveFileDialog.FileName = fileName + currentImageSuffix;
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {

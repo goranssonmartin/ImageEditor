@@ -1,6 +1,6 @@
 ﻿namespace ImageEditorWinForms
 {
-    partial class Form1
+    partial class ImageEditorForm
     {
         /// <summary>
         /// Required designer variable.

@@ -44,13 +44,13 @@ namespace ImageEditor
 
         public static Bitmap MakeImageBlurred(Bitmap originalImage)
         {
-            Bitmap blurred = new Bitmap(originalImage.Width, originalImage.Height);
+            Bitmap blurredImage = new Bitmap(originalImage.Width, originalImage.Height);
+
 
             for (int x = 0; x < originalImage.Width; x++)
             {
                 for (int y = 0; y < originalImage.Height; y++)
                 {
-
                     int averageR = 0;
                     int averageG = 0;
                     int averageB = 0;
@@ -64,7 +64,7 @@ namespace ImageEditor
                         averageR = averageR / 4;
                         averageG = averageG / 4;
                         averageB = averageB / 4;
-                        blurred.SetPixel(x, y, Color.FromArgb(255, averageR, averageG, averageB));
+                        blurredImage.SetPixel(x, y, Color.FromArgb(255, averageR, averageG, averageB));
                     }
 
                     //Bottom Left Corner
@@ -76,7 +76,7 @@ namespace ImageEditor
                         averageR = averageR / 4;
                         averageG = averageG / 4;
                         averageB = averageB / 4;
-                        blurred.SetPixel(x, y, Color.FromArgb(255, averageR, averageG, averageB));
+                        blurredImage.SetPixel(x, y, Color.FromArgb(255, averageR, averageG, averageB));
                     }
 
                     //Top Right Corner
@@ -88,7 +88,7 @@ namespace ImageEditor
                         averageR = averageR / 4;
                         averageG = averageG / 4;
                         averageB = averageB / 4;
-                        blurred.SetPixel(x, y, Color.FromArgb(255, averageR, averageG, averageB));
+                        blurredImage.SetPixel(x, y, Color.FromArgb(255, averageR, averageG, averageB));
                     }
 
                     //Bottom Right Corner
@@ -100,7 +100,7 @@ namespace ImageEditor
                         averageR = averageR / 4;
                         averageG = averageG / 4;
                         averageB = averageB / 4;
-                        blurred.SetPixel(x, y, Color.FromArgb(255, averageR, averageG, averageB));
+                        blurredImage.SetPixel(x, y, Color.FromArgb(255, averageR, averageG, averageB));
                     }
 
                     //Left Side
@@ -112,7 +112,7 @@ namespace ImageEditor
                         averageR = averageR / 6;
                         averageG = averageG / 6;
                         averageB = averageB / 6;
-                        blurred.SetPixel(x, y, Color.FromArgb(255, averageR, averageG, averageB));
+                        blurredImage.SetPixel(x, y, Color.FromArgb(255, averageR, averageG, averageB));
                     }
                     //Top Side
                     else if (y == 0 && x > 0 && x < originalImage.Width - 1)
@@ -123,7 +123,7 @@ namespace ImageEditor
                         averageR = averageR / 6;
                         averageG = averageG / 6;
                         averageB = averageB / 6;
-                        blurred.SetPixel(x, y, Color.FromArgb(255, averageR, averageG, averageB));
+                        blurredImage.SetPixel(x, y, Color.FromArgb(255, averageR, averageG, averageB));
                     }
                     //Right Side
                     else if (x == originalImage.Width - 1 && y > 0 && y < originalImage.Height - 1)
@@ -134,7 +134,7 @@ namespace ImageEditor
                         averageR = averageR / 6;
                         averageG = averageG / 6;
                         averageB = averageB / 6;
-                        blurred.SetPixel(x, y, Color.FromArgb(255, averageR, averageG, averageB));
+                        blurredImage.SetPixel(x, y, Color.FromArgb(255, averageR, averageG, averageB));
 
                     }
                     //Bottom Side
@@ -146,7 +146,7 @@ namespace ImageEditor
                         averageR = averageR / 6;
                         averageG = averageG / 6;
                         averageB = averageB / 6;
-                        blurred.SetPixel(x, y, Color.FromArgb(255, averageR, averageG, averageB));
+                        blurredImage.SetPixel(x, y, Color.FromArgb(255, averageR, averageG, averageB));
 
                     }
                     //Middle
@@ -158,12 +158,12 @@ namespace ImageEditor
                         averageR = averageR / 9;
                         averageG = averageG / 9;
                         averageB = averageB / 9;
-                        blurred.SetPixel(x, y, Color.FromArgb(255, averageR, averageG, averageB));
+                        blurredImage.SetPixel(x, y, Color.FromArgb(255, averageR, averageG, averageB));
                     }
                 }
 
             }
-            return blurred;
+            return blurredImage;
         }
     }
 }

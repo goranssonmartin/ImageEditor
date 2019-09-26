@@ -6,7 +6,7 @@ using System.Drawing.Imaging;
 
 namespace ImageEditorConsole
 {
-   class Program
+    class Program
     {
         static void Main(string[] args)
 
@@ -35,11 +35,40 @@ namespace ImageEditorConsole
             string storageDirectory = Path.GetDirectoryName(imagePath);
             string fileName = Path.GetFileNameWithoutExtension(imagePath);
 
-            greyScale.Save(storageDirectory + "\\" + fileName + "_greyScale.jpg", ImageFormat.Jpeg);
-            negative.Save(storageDirectory + "\\" + fileName + "_negative.jpg", ImageFormat.Jpeg);
-            blurred.Save(storageDirectory + "\\" + fileName + "_blurred.jpg", ImageFormat.Jpeg);
+            greyScale.Save(Path.Combine(storageDirectory, fileName+"_greyScale.jpg"), ImageFormat.Jpeg);
+            negative.Save(Path.Combine(storageDirectory, fileName+"_negative.jpg"), ImageFormat.Jpeg);
+            blurred.Save(Path.Combine(storageDirectory, fileName+"_blurred.jpg"), ImageFormat.Jpeg);
 
         }
+
+        public static string CheckIfGivenFileExists(string imagePath)
+        {
+            if (File.Exists(imagePath) && CheckIfItsAnImage(imagePath) == true)
+            {
+                return imagePath;
+            }
+
+            else
+            {
+                Console.WriteLine("Enter a valid filepath");
+                imagePath = Console.ReadLine();
+                return CheckIfGivenFileExists(imagePath);
+            }
+        }
+
+        public static bool CheckIfItsAnImage(string imagePath)
+        {
+            try
+            {
+                Bitmap test = new Bitmap(imagePath);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public static Bitmap TryToCreateNewBitmap(string imagePath)
         {
             Bitmap originalImage;
@@ -58,21 +87,6 @@ namespace ImageEditorConsole
 
         }
 
-        public static string CheckIfGivenFileExists(string imagePath)
-        {
-            if (File.Exists(imagePath))
-            {
-                return imagePath;
-            }
-
-            else
-            {
-                Console.WriteLine("Enter a valid filepath");
-                imagePath = Console.ReadLine();
-                return CheckIfGivenFileExists(imagePath);
-            }
-
-
-        }
+        
     }
 }
