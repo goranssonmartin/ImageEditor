@@ -39,7 +39,7 @@ namespace ImageEditorWinForms
         private void OpenFileButton_Click(object sender, EventArgs e)
         {
             openFileDialog.InitialDirectory = "C:\\";
-            openFileDialog.Filter = "Image Files (*.PNG; *.JPG)| *.PNG; *.JPG";
+            openFileDialog.Filter = "Image Files (*.PNG; *.JPG; *.BMP)| *.PNG; *.JPG; *.BMP";
             openFileDialog.FileName = "";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -82,9 +82,9 @@ namespace ImageEditorWinForms
         private void SaveFileButton_Click(object sender, EventArgs e)
         {
             string fileName = Path.GetFileNameWithoutExtension(imagePath);
+            string extension = Path.GetExtension(imagePath);
+            saveFileDialog.FileName = fileName + currentImageSuffix + extension;
             saveFileDialog.InitialDirectory = Path.GetDirectoryName(imagePath);
-            saveFileDialog.Filter = "Image Files (*.JPG)| *.JPG";
-            saveFileDialog.FileName = fileName + currentImageSuffix;
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {

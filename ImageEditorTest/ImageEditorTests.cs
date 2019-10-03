@@ -4,7 +4,7 @@ using System.Drawing;
 
 namespace Tests
 {
-    public class Tests
+    public class ImageEditorTests
     {
 
         [Test]
@@ -23,9 +23,10 @@ namespace Tests
             negativeTest.SetPixel(2, 0, black);
             negativeTest.SetPixel(2, 1, black);
             negativeTest.SetPixel(2, 2, black);
-            Assert.AreEqual(white, ImageEditingProgram.MakeImageNegative(negativeTest).GetPixel(0, 0));
-            Assert.AreEqual(white, ImageEditingProgram.MakeImageNegative(negativeTest).GetPixel(1, 1));
-            Assert.AreEqual(white, ImageEditingProgram.MakeImageNegative(negativeTest).GetPixel(2, 2));
+            Bitmap bitmapTestResult = ImageEditingProgram.MakeImageNegative(negativeTest);
+            Assert.AreEqual(white, bitmapTestResult.GetPixel(0, 0));
+            Assert.AreEqual(white, bitmapTestResult.GetPixel(1, 1));
+            Assert.AreEqual(white, bitmapTestResult.GetPixel(2, 2));
         }
 
         [Test]
@@ -102,10 +103,11 @@ namespace Tests
             blurredTest.SetPixel(2, 0, black);
             blurredTest.SetPixel(2, 1, black);
             blurredTest.SetPixel(2, 2, black);
-            Assert.AreEqual(expectedBlurredPixel, ImageEditingProgram.MakeImageBlurred(blurredTest).GetPixel(0, 0));
-            Assert.AreEqual(expectedBlurredPixel, ImageEditingProgram.MakeImageBlurred(blurredTest).GetPixel(2, 0));
-            Assert.AreEqual(expectedBlurredPixel, ImageEditingProgram.MakeImageBlurred(blurredTest).GetPixel(0, 2));
-            Assert.AreEqual(expectedBlurredPixel, ImageEditingProgram.MakeImageBlurred(blurredTest).GetPixel(2, 2));
+            Bitmap testResultBitmap = ImageEditingProgram.MakeImageBlurred(blurredTest);
+            Assert.AreEqual(expectedBlurredPixel, testResultBitmap.GetPixel(0, 0));
+            Assert.AreEqual(expectedBlurredPixel, testResultBitmap.GetPixel(2, 0));
+            Assert.AreEqual(expectedBlurredPixel, testResultBitmap.GetPixel(0, 2));
+            Assert.AreEqual(expectedBlurredPixel, testResultBitmap.GetPixel(2, 2));
         }
 
         
@@ -127,10 +129,11 @@ namespace Tests
             blurredTest.SetPixel(2, 0, black);
             blurredTest.SetPixel(2, 1, black);
             blurredTest.SetPixel(2, 2, black);
-            Assert.AreEqual(expectedBlurredPixel, ImageEditingProgram.MakeImageBlurred(blurredTest).GetPixel(0, 1));
-            Assert.AreEqual(expectedBlurredPixel, ImageEditingProgram.MakeImageBlurred(blurredTest).GetPixel(1, 0));
-            Assert.AreEqual(expectedBlurredPixel, ImageEditingProgram.MakeImageBlurred(blurredTest).GetPixel(2, 1));
-            Assert.AreEqual(expectedBlurredPixel, ImageEditingProgram.MakeImageBlurred(blurredTest).GetPixel(1, 2));
+            Bitmap testResultBitmap = ImageEditingProgram.MakeImageBlurred(blurredTest);
+            Assert.AreEqual(expectedBlurredPixel, testResultBitmap.GetPixel(0, 1));
+            Assert.AreEqual(expectedBlurredPixel, testResultBitmap.GetPixel(1, 0));
+            Assert.AreEqual(expectedBlurredPixel, testResultBitmap.GetPixel(2, 1));
+            Assert.AreEqual(expectedBlurredPixel, testResultBitmap.GetPixel(1, 2));
         }
 
         [Test]
@@ -153,10 +156,11 @@ namespace Tests
             blurredTest.SetPixel(0, 1, black);
             blurredTest.SetPixel(1, 0, black);
             blurredTest.SetPixel(1, 1, white);
-            Assert.AreEqual(expectedBlurredPixel, ImageEditingProgram.MakeImageBlurred(blurredTest).GetPixel(0, 0));
-            Assert.AreEqual(expectedBlurredPixel, ImageEditingProgram.MakeImageBlurred(blurredTest).GetPixel(0, 1));
-            Assert.AreEqual(expectedBlurredPixel, ImageEditingProgram.MakeImageBlurred(blurredTest).GetPixel(1, 0));
-            Assert.AreEqual(expectedBlurredPixel, ImageEditingProgram.MakeImageBlurred(blurredTest).GetPixel(1, 1));
+            Bitmap testResultBitmap = ImageEditingProgram.MakeImageBlurred(blurredTest);
+            Assert.AreEqual(expectedBlurredPixel, testResultBitmap.GetPixel(0, 0));
+            Assert.AreEqual(expectedBlurredPixel, testResultBitmap.GetPixel(0, 1));
+            Assert.AreEqual(expectedBlurredPixel, testResultBitmap.GetPixel(1, 0));
+            Assert.AreEqual(expectedBlurredPixel, testResultBitmap.GetPixel(1, 1));
         }
 
 

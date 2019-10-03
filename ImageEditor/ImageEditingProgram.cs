@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.IO;
 
 namespace ImageEditor
 {
@@ -167,3 +166,4 @@ namespace ImageEditor
         }
     }
 }
+
